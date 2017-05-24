@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!-- saved from url=(0084)https://fullcalendar.io/js/fullcalendar-scheduler-1.6.2/demos/external-dragging.html -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+	<link href="./external-dragging_files/fullcalendar.min.css" rel="stylesheet">
+	<link href="./external-dragging_files/fullcalendar.print.min.css" rel="stylesheet" media="print">
+	<link href="./external-dragging_files/scheduler.min.css" rel="stylesheet">
+	<script src="./external-dragging_files/moment.min.js.download"></script>
+	<script src="./external-dragging_files/jquery.min.js.download"></script>
+	<script src="./external-dragging_files/jquery-ui.min.js.download"></script>
+	<script src="./external-dragging_files/fullcalendar.min.js.download"></script>
+	<script src="./external-dragging_files/scheduler.min.js.download"></script>
+	<script>
+
+	$(function() { // document ready
+
+
+		/* initialize the external events
+		-----------------------------------------------------------------*/
+
+		$('#external-events .fc-event').each(function() {
+
+			// store data so the calendar knows to render an event upon drop
+			$(this).data('event', {
+				title: $.trim($(this).text()), // use the element's text as the event title
+				stick: true // maintain when user navigates (see docs on the renderEvent method)
+			});
+
+			// make the event draggable using jQuery UI
+			$(this).draggable({
+				zIndex: 999,
+				revert: true,      // will cause the event to go back to its
+				revertDuration: 0  //  original position after the drag
+			});
+
+		});
+
+
+		/* initialize the calendar
+		-----------------------------------------------------------------*/
+
+		$('#calendar').fullCalendar({
+			now: '2017-05-07',
+			editable: true, // enable draggable events
+			droppable: true, // this allows things to be dropped onto the calendar
+			aspectRatio: 1.8,
+			scrollTime: '00:00', // undo default 6am scrollTime
+			header: {
+				left: 'today prev,next',
+				center: 'title',
+				right: 'timelineDay,timelineThreeDays,agendaWeek,month'
+			},
+			defaultView: 'timelineDay',
+			views: {
+				timelineThreeDays: {
+					type: 'timeline',
+					duration: { days: 3 }
+				}
+			},
+			resourceLabelText: 'Rooms',
+			resources: [
+				{ id: 'a', title: 'Auditorium A' },
+				{ id: 'b', title: 'Auditorium B', eventColor: 'green' },
+				{ id: 'c', title: 'Auditorium C', eventColor: 'orange' },
+				{ id: 'd', title: 'Auditorium D'},
+				{ id: 'e', title: 'Auditorium E' },
+				{ id: 'f', title: 'Auditorium F', eventColor: 'red' },
+
+			],
+			events: [
+				{ id: '1', resourceId: 'b', start: '2017-05-07T02:00:00', end: '2017-05-07T07:00:00', title: 'event 1' },
+				{ id: '2', resourceId: 'c', start: '2017-05-07T05:00:00', end: '2017-05-07T22:00:00', title: 'event 2' },
+				{ id: '3', resourceId: 'd', start: '2017-05-06', end: '2017-05-08', title: 'event 3' },
+				{ id: '4', resourceId: 'e', start: '2017-05-07T03:00:00', end: '2017-05-07T08:00:00', title: 'event 4' },
+				{ id: '5', resourceId: 'f', start: '2017-05-07T00:30:00', end: '2017-05-07T02:30:00', title: 'event 5' }
+			],
+			drop: function(date, jsEvent, ui, resourceId) {
+				console.log('drop', date.format(), resourceId);
+
+				// is the "remove after drop" checkbox checked?
+				if ($('#drop-remove').is(':checked')) {
+					// if so, remove the element from the "Draggable Events" list
+					$(this).remove();
+				}
+			},
+			eventReceive: function(event) { // called when a proper external event is dropped
+				console.log('eventReceive', event);
+			},
+			eventDrop: function(event) { // called when an event (already on the calendar) is moved
+				console.log('eventDrop', event);
+			}
+		});
+
+	});
+
+	</script>
+	<style>
+
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	}
+
+	#wrap {
+		width: 1100px;
+		margin: 0 auto;
+	}
+
+	#external-events {
+		float: left;
+		width: 150px;
+		padding: 0 10px;
+		border: 1px solid #ccc;
+		background: #eee;
+		text-align: left;
+	}
+
+	#external-events h4 {
+		font-size: 16px;
+		margin-top: 0;
+		padding-top: 1em;
+	}
+
+	#external-events .fc-event {
+		margin: 10px 0;
+		cursor: pointer;
+	}
+
+	#external-events p {
+		margin: 1.5em 0;
+		font-size: 11px;
+		color: #666;
+	}
+
+	#external-events p input {
+		margin: 0;
+		vertical-align: middle;
+	}
+
+	#calendar {
+		float: right;
+		width: 900px;
+	}
+
+	</style>
+</head>
+<body class="" style="cursor: auto;">
+	<div id="wrap">
+
+		<div id="external-events">
+			<h4>Draggable Events</h4>
+			<div class="fc-event ui-draggable ui-draggable-handle" style="background-color: green; z-index: auto; left: 0px; top: 0px;">My Event </div>
+			<div class="fc-event ui-draggable ui-draggable-handle">My Event 2</div>
+			<div class="fc-event ui-draggable ui-draggable-handle">My Event 3</div>
+			<div class="fc-event ui-draggable ui-draggable-handle" style="z-index: auto; left: 0px; top: 0px;">My Event 5</div>
+			<p>
+				<input type="checkbox" id="drop-remove">
+				<label for="drop-remove">remove after drop</label>
+			</p>
+		</div>
+		<div id="calendar" class="fc fc-unthemed fc-ltr">
+
+		</div>
+		<div class="fc-clear">
+		</div>
+	</div>
+	<div class="fc-view-container">
+		<div class="fc-view fc-timelineDay-view fc-timeline fc-nested">
+		</div>
+	</div>
+</div>
+
+<div style="clear:both">
+</div>
+
+</div>
+</body>
+</html>
