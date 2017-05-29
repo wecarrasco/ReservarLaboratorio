@@ -9,14 +9,20 @@
             padding:0px;
             height:100%;
             overflow:hidden;
-        }   
+        }
+
+        .boton{
+          margin-top: 2%;
+          margin-bottom: 1%;
+        }
+
     </style>
 </head>
 
 
 <script type="text/javascript" charset="utf-8">
     function init() {
-        scheduler.init('scheduler_here',new Date(2013,8,4),"month");
+        scheduler.init('scheduler_here',new Date(),"month");
         scheduler.templates.xml_date = function(value){ return new Date(value); };
         scheduler.load("/data", "json");
         scheduler.config.xml_date="%Y-%m-%d %H:%i";
@@ -25,9 +31,22 @@
         dp.init(scheduler);
         dp.setTransactionMode("POST", false);
     }
+
+    function aLab1(){
+      window.location.href = "lab1.html";
+    }
+
+    function aLab2(){
+      window.location.href = "lab2.html";
+    }
+
 </script>
 
 <body onload="init();">
+  <div class="boton">
+      <button onclick="aLab1()" type="button" name="button">Laboratorio 1</button>
+      <button onclick="aLab2()" type="button" name="button">Laboratorio 2</button>
+  </div>
     <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
         <div class="dhx_cal_navline">
             <div class="dhx_cal_prev_button">&nbsp;</div>
