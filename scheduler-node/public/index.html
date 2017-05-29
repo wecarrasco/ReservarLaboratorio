@@ -12,11 +12,16 @@
         }
 
         .boton{
-          margin-top: 2%;
-          margin-bottom: 1%;
+            margin: 2% auto 1% 1%;   
+        }
+
+        .btn{
+            color: black !important;
         }
 
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+
 </head>
 
 
@@ -44,8 +49,8 @@
 
 <body onload="init();">
   <div class="boton">
-      <button onclick="aLab1()" type="button" name="button">Laboratorio 1</button>
-      <button onclick="aLab2()" type="button" name="button">Laboratorio 2</button>
+      <button class="waves-effect waves-light white btn" onclick="aLab1()" type="button" name="button">Laboratorio 1</button>
+      <button class="waves-effect waves-light white btn" onclick="aLab2()" type="button" name="button">Laboratorio 2</button>
   </div>
     <div id="scheduler_here" class="dhx_cal_container" style='width:100%; height:100%;'>
         <div class="dhx_cal_navline">
