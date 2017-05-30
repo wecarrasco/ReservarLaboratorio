@@ -1,0 +1,110 @@
+<%include partials/header%>
+<div class="container">
+  <h1 class="center">Laboratorio 1</h1>
+  <div class="row asientos">
+    <div class="col s6 l6">
+      <h4>Propiedades:</h2>
+        <ul class="collection">
+          <li class="collection-item avatar">
+            <img src="https://cdn2.iconfinder.com/data/icons/household-things/64/house_kitchen_table-128.png" alt="" class="circle">
+            <span class="title">Cantidad de Asientos</span>
+            <p>35 Asientos <br>
+             Laboratorio Mediano
+           </p>
+         </li>
+         <li class="collection-item avatar">
+          <img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/computer-128.png" alt="" class="circle">
+          <span class="title">Computadoras</span>
+          <p>Equipadas con programas basicos <br>
+
+          </p>
+        </li>
+        <li class="collection-item avatar">
+          <img src="https://cdn0.iconfinder.com/data/icons/travel-and-leisure/512/16-128.png" alt="" class="circle">
+          <span class="title">Internet</span>
+          <p>Velocidad: Alta <br>
+
+          </p>
+        </li>
+        <li class="collection-item avatar">
+          <img src="https://cdn0.iconfinder.com/data/icons/cinema-and-multimedia/800/datashow-128.png" alt="" class="circle">
+          <span class="title">Datashow</span>
+          <p>Marca: Dell <br>
+
+          </p>
+        </li>
+        <li class="collection-item avatar">
+          <img src="https://cdn2.iconfinder.com/data/icons/mixed-1st-volume/512/tabla-128.png" alt="" class="circle">
+          <span class="title">Pizarra</span>
+          <p>Material: Formica <br>
+
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class="col l6">
+      <div class="card" style="margin-top: 15.5%;">
+        <div class="card-image">
+          <img src="https://cdn.pixabay.com/photo/2016/06/02/18/15/lab-1431751_960_720.jpg" alt="">
+        </div>
+      </div>    
+    </div>
+  </div>
+
+  <a class="waves-effect waves-light btn modal-trigger" style="margin-left: 40%;" data-target="modal1">Hacer Reservacion</a>
+
+  <div id="modal1" class="modal" style="max-height: 90%;">
+    <div class="modal-content">
+      <h4>Información de la Reservación</h4>
+
+      <div class="row">
+        <form class="col s12" action="/laboratorio1" method="POST">
+          <div class="row modal-form-row">
+            <div class="input-field col s12">
+              <input id="nombreEvento" name="nombreEvento" type="text" class="validate">
+              <label for="nombreEvento">Nombre del evento</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="organizacion" name="organizacion" type="text">
+              <label for="organizacion">Organización del evento</label>
+            </div>
+          </div>       
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="propositoEvento" name="propositoEvento" type="text" class="materialize-textarea"></textarea>
+              <label for="propositoEvento">Proposito del evento</label>
+            </div>
+          </div>  
+          <div class="row">
+            <div class="input-field col s6">
+              <input type="date" class="datepicker" id="fechaInicio" name="fechaInicio">
+              <label for="fechaInicio">Fecha de Inicio</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="date" class="datepicker" id="fechaFinal" name="fechaFinal">
+              <label for="fechaFinal">Fecha Final</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+            <input type="text" id="horaInicio" name="horaInicio">
+              <label for="horaInicio">Hora de Inicio</label>
+            </div>
+            <div class="input-field col s6">
+              <input type="text" id="horaFinal" name="horaFinal">
+              <label for="horaFinal">Hora Final</label>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a class=" modal-action modal-close waves-effect waves-light btn" type="submit">Submit</a>
+          </div>      
+        </form>
+      </div>
+    </div>    
+  </div>
+</div>
+
+
+<%include partials/footer%>
