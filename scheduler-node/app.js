@@ -1,62 +1,55 @@
 var express = require('express');
 var path = require('path');
-
+var fs=require('fs');
 //connect to the mongoDB
 var db = require('mongoskin').db("mongodb://localhost:27017/testdb", { w: 0});
-    db.bind('events');
-    db.bind('users');
-    db.bind('laboratorios');
-    /*db.events.insert({
-        ID: getNextSequence("userid"),
-        Name: "Faasdsad",
-        Org: "jajaja",
-        Proposito: "jijiji",
-        IDUser: 1
-    }, function(err,res){
-        if(err)
-            throw err;
-    });*/
-    var x;
-    db.events.find({},{ID:1,_id:0}).sort({ID:-1}).limit(1).toArray(function(err,res){
-        if(err){
-            throw err;
+db.bind('events');
+db.bind('users');
+db.bind('laboratorios');
+
+function verificar(user,pass){
+    var resultado=db.users.findOne({username:user,password:pass},function(err,res){
+        if(!err){
+            if(res!=null){
+                return true;
+            }else{
+                return false;
+            }
         }else{
-            if(res[0].ID===3){
-                console.log('yay');
-                x=res[0].ID;//x=3
-                console.log(x);
-            }        
+            return false;
         }
     });
-    console.log(x);//x=0
-    
+    return false;
+}
 
 function insertar(nombre, org, prop, IDusuario){
-    db.events.insert({Name:nombre, Org:org, Proposito:prop, IDUser:IDusuario},function(err,res){
+    var numeros=fs.readFileSync('id.txt','utf-8');
+    numeros++;
+    db.events.insert({ID:numeros,Name:nombre, Org:org, Proposito:prop, IDUser:IDusuario},function(err,res){
        if(!err){
             console.log('insertado con exito');
+            fs.unlinkSync('id.txt');
+            fs.writeFileSync('id.txt',numeros);
         }else{
             console.log('Fallo insert');
         }
-    }); 
+    });
 }
 
 function borrar(id){
-    console.log('----BORRAR----');
     db.events.remove({ID:id},function(err,res){
         if(!err){
-            console.log('success delete');
+            console.log(id+' success delete');
         }else{
             console.log(err);
         }
     });
 }
 
-function actualizar(id, nName, nOrg, nProp){
-    console.log('----ACTUALIZAR----');
-    db.events.update({ID:id},{$set:{name:nName,}},function(err,res){
+function actualizar(id,nName, nOrg, nProp){
+    db.events.update({ID:id},{$set:{Name:nName,Org:nOrg,Proposito:nProp}},function(err,res){
         if(!err){
-            console.log('succes update');
+            console.log(id+' succes update');
         }else{
             console.log(err);
         }
