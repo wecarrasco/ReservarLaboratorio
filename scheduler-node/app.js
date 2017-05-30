@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var bodyParser = require("body-parser")
 var fs=require('fs');
 //connect to the mongoDB
 var db = require('mongoskin').db("mongodb://localhost:27017/testdb", { w: 0});
@@ -58,8 +59,31 @@ function actualizar(id,nName, nOrg, nProp){
 //create express app, use public folder for static files
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({extended:true}));
+app.set("view engine", "ejs");
 
 //is necessary for parsing POST request
 app.use(express.bodyParser());
+
+app.get("/", function(req, res){
+    console.log("LOGIN")
+    //res.render("login")
+});
+
+app.post("/", function(req, res){
+    var loginBoolean = verificar(req.body.user, req.body.password);
+    if (loginBoolean) {
+        res.redirect("/calendario");
+    }else{
+        res.render("/", {loginBoolean:loginBoolean});
+    }
+});
+
+app.get("/laboratorio1", function(req, res){
+    console.log("abriendo laboratorio1")
+    res.render("lab1")
+});
+
+
 
 app.listen(3000);
