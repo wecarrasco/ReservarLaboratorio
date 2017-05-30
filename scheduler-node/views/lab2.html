@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<meta charset="utf-8">
+	<title>Laboratorio</title>
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+	<link rel="stylesheet" href="/lab1.css">
+
+</head>
+<body>
+	<div class="container">
+		<h1 class="center">Laboratorio 2</h1>
+		<div class="row asientos">
+			<div class="col s6 l6">
+				<h4>Propiedades:</h4>
+				<ul class="collection">
+					<li class="collection-item avatar">
+						<img src="https://cdn2.iconfinder.com/data/icons/household-things/64/house_kitchen_table-128.png" alt="" class="circle">
+						<span class="title">Cantidad de Asientos</span>
+						<p>50 Asientos <br>
+							Laboratorio Grande
+						</p>
+					</li>
+					<li class="collection-item avatar">
+						<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/computer-128.png" alt="" class="circle">
+						<span class="title">Computadoras</span>
+						<p>Equipadas con programas basicos <br>
+
+						</p>
+					</li>
+					<li class="collection-item avatar">
+						<img src="https://cdn2.iconfinder.com/data/icons/snipicons/500/microphone-128.png" alt="" class="circle">
+						<span class="title">Microfono</span>
+						<p>Marca: Bose <br>
+
+						</p>
+					</li>
+					<li class="collection-item avatar">
+						<img src="https://cdn0.iconfinder.com/data/icons/cinema-and-multimedia/800/datashow-128.png" alt="" class="circle">
+						<span class="title">Datashow</span>
+						<p>Marca: Dell <br>
+
+						</p>
+					</li>
+					<li class="collection-item avatar">
+						<img src="https://cdn2.iconfinder.com/data/icons/mixed-1st-volume/512/tabla-128.png" alt="" class="circle">
+						<span class="title">Pizarra</span>
+						<p>Material: Formica <br>
+
+						</p>
+					</li>
+				</ul>
+			</div>
+			<div class="col l6">
+				<div class="card" style="margin-top: 7%;">
+					<div class="card-image">
+						<img src="https://cdn.pixabay.com/photo/2013/09/11/00/28/language-lab-181083_960_720.jpg" alt="">
+					</div>
+				</div>    
+			</div>
+		</div>
+
+		<a class="waves-effect waves-light btn modal-trigger" style="margin-left: 40%;" data-target="modal1">Hacer Reservacion</a>
+
+		<div id="modal1" class="modal" style="max-height: 90%;">
+			<div class="modal-content">
+				<h4>Información de la Reservación</h4>
+
+				<div class="row">
+					<form class="col s12" action="/laboratorio1" method="POST">
+						<div class="row modal-form-row">
+							<div class="input-field col s12">
+								<input id="nombreEvento" type="text" class="validate">
+								<label for="nombreEvento">Nombre del evento</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<input id="organizacion" type="text">
+								<label for="organizacion">Organización del evento</label>
+							</div>
+						</div>       
+						<div class="row">
+							<div class="input-field col s12">
+								<textarea id="propositoEvento" type="text" class="materialize-textarea"></textarea>
+								<label for="propositoEvento">Proposito del evento</label>
+							</div>
+						</div>  
+						<div class="row">
+							<div class="input-field col s6">
+								<input type="date" class="datepicker" id="fechaInicio">
+								<label for="fechaInicio">Fecha de Inicio</label>
+							</div>
+							<div class="input-field col s6">
+								<input type="date" class="datepicker" id="fechaFinal">
+								<label for="fechaFinal">Fecha Final</label>
+							</div>
+						</div>
+						<div class="row">
+								<div class="input-field col s6">
+									<select name="horaInicio" id="horaInicio" style="position: relative; display: inline-block; vertical-align: middle; margin: 10px; background-color: #1abc9c;color: #fff; font-size: inherit; padding: .5em; padding-right: 2.5em; border: 0;margin: 0; border-radius: 3px;text-indent: 0.01px;text-overflow: '';-webkit-appearance: button; ">
+										<option value="hora7am">7 A.M</option>
+										<option value="hora8am">8 A.M</option>
+										<option value="hora9am">9 A.M</option>
+										<option value="hora10am">10 A.M</option>
+										<option value="hora11am">11 A.M</option>
+										<option value="hora1pm">1 P.M</option>
+										<option value="hora2pm">2 P.M</option>
+										<option value="hora3pm">3 P.M</option>
+										<option value="hora4pm">4 P.M</option>
+										<option value="hora5pm">5 P.M</option>
+									</select>
+								</div>
+								<div class="input-field col s6">
+									<select name="horaFinal" id="horaFinal" style="position: relative; display: inline-block; vertical-align: middle; margin: 10px; background-color: #1abc9c;color: #fff; font-size: inherit; padding: .5em; padding-right: 2.5em; border: 0;margin: 0; border-radius: 3px;text-indent: 0.01px;text-overflow: '';-webkit-appearance: button; ">
+										<option value="hora7am">7 A.M</option>
+										<option value="hora8am">8 A.M</option>
+										<option value="hora9am">9 A.M</option>
+										<option value="hora10am">10 A.M</option>
+										<option value="hora11am">11 A.M</option>
+										<option value="hora1pm">1 P.M</option>
+										<option value="hora2pm">2 P.M</option>
+										<option value="hora3pm">3 P.M</option>
+										<option value="hora4pm">4 P.M</option>
+										<option value="hora5pm">5 P.M</option>
+									</select>
+								</div>
+							</div>
+						<div class="modal-footer">
+							<a class=" modal-action modal-close waves-effect waves-light btn">Submit</a>
+						</div>      
+					</form>
+				</div>
+			</div>
+
+		</div>
+	</div>
+<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+
+
+<script>
+	$(document).ready(function(){
+    	// the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+    	$('.modal-trigger').leanModal();
+    });
+</script>
+
+<script>
+	$('.datepicker').pickadate({
+	    selectMonths: true, // Creates a dropdown to control month
+	    selectYears: 15 // Creates a dropdown of 15 years to control year
+	});
+</script>
+
+</body>
+</html>
