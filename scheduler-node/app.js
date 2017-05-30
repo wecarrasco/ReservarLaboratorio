@@ -2,9 +2,66 @@ var express = require('express');
 var path = require('path');
 
 //connect to the mongoDB
-var db = require('mongoskin').db("localhost/testdb", { w: 0});
-    db.bind('event');
+var db = require('mongoskin').db("mongodb://localhost:27017/testdb", { w: 0});
+    db.bind('events');
+    db.bind('users');
+    db.bind('laboratorios');
+    /*db.events.insert({
+        ID: getNextSequence("userid"),
+        Name: "Faasdsad",
+        Org: "jajaja",
+        Proposito: "jijiji",
+        IDUser: 1
+    }, function(err,res){
+        if(err)
+            throw err;
+    });*/
+    var x;
+    db.events.find({},{ID:1,_id:0}).sort({ID:-1}).limit(1).toArray(function(err,res){
+        if(err){
+            throw err;
+        }else{
+            if(res[0].ID===3){
+                console.log('yay');
+                x=res[0].ID;//x=3
+                console.log(x);
+            }        
+        }
+    });
+    console.log(x);//x=0
+    
 
+function insertar(nombre, org, prop, IDusuario){
+    db.events.insert({Name:nombre, Org:org, Proposito:prop, IDUser:IDusuario},function(err,res){
+       if(!err){
+            console.log('insertado con exito');
+        }else{
+            console.log('Fallo insert');
+        }
+    }); 
+}
+
+function borrar(id){
+    console.log('----BORRAR----');
+    db.events.remove({ID:id},function(err,res){
+        if(!err){
+            console.log('success delete');
+        }else{
+            console.log(err);
+        }
+    });
+}
+
+function actualizar(id, nName, nOrg, nProp){
+    console.log('----ACTUALIZAR----');
+    db.events.update({ID:id},{$set:{name:nName,}},function(err,res){
+        if(!err){
+            console.log('succes update');
+        }else{
+            console.log(err);
+        }
+    });
+}
 //create express app, use public folder for static files
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
@@ -13,12 +70,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.bodyParser());
 
 app.get('/init', function(req, res){
-    db.event.insert({ 
+    db.events.insert({ 
         text:"My test event A", 
         start_date: new Date(2013,8,1),
         end_date:   new Date(2013,8,5)
     });
-    db.event.insert({ 
+    db.events.insert({ 
         text:"One more test event", 
         start_date: new Date(2013,8,3),
         end_date:   new Date(2013,8,8),
@@ -32,7 +89,7 @@ app.get('/init', function(req, res){
 
 
 app.get('/data', function(req, res){
-    db.event.find().toArray(function(err, data){
+    db.events.find().toArray(function(err, data){
         //set id property for all records
         for (var i = 0; i < data.length; i++)
             data[i].id = data[i]._id;
@@ -70,11 +127,11 @@ app.post('/data', function(req, res){
 
     //run db operation
     if (mode == "updated")
-        db.event.updateById( sid, data, update_response);
+        db.events.updateById( sid, data, update_response);
     else if (mode == "inserted")
-        db.event.insert(data, update_response);
+        db.events.insert(data, update_response);
     else if (mode == "deleted")
-        db.event.removeById( sid, update_response);
+        db.events.removeById( sid, update_response);
     else
         res.send("Not supported operation");
 });
