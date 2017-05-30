@@ -66,8 +66,7 @@ app.set("view engine", "ejs");
 app.use(express.bodyParser());
 
 app.get("/", function(req, res){
-    console.log("LOGIN")
-    //res.render("login")
+    res.render("index")
 });
 
 app.post("/", function(req, res){
@@ -80,10 +79,37 @@ app.post("/", function(req, res){
 });
 
 app.get("/laboratorio1", function(req, res){
-    console.log("abriendo laboratorio1")
     res.render("lab1")
 });
 
+app.get("/laboratorio2", function(req, res){
+    res.render("lab2")
+});
 
+app.post("/laboratorio1", function(req, res){
+    console.log("POSTEO!")
+    var nombreEvento = req.query.nombreEvento;
+    var organizacion = req.query.organizacion;
+    var propositoEvento = req.query.propositoEvento;
+    var fechaInicio = req.query.fechaInicio;
+    var fechaFinal = req.query.fechaFinal;
+    var horaInicio = req.query.horaInicio;
+    var horaFinal = req.query.horaFinal;
+    console.log(nombreEvento);
+    res.redirect("/");
+});
+
+app.post("/laboratorio2", function(req, res){
+    console.log("POSTEO!")
+    var nombreEvento = req.query.nombreEvento;
+    var organizacion = req.query.organizacion;
+    var propositoEvento = req.query.propositoEvento;
+    var fechaInicio = req.query.fechaInicio;
+    var fechaFinal = req.query.fechaFinal;
+    var horaInicio = req.query.horaInicio;
+    var horaFinal = req.query.horaFinal;
+    console.log(nombreEvento);
+    res.redirect("/");
+});
 
 app.listen(3000);
